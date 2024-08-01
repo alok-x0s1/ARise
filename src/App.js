@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import authService from "./firebase/auth";
+import { useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const data = {
+		email: "alok@a.com",
+		password: "123456abc",
+	};
+	const createUser = async (x) => {
+		const data = await authService.createAccount(x);
+		console.log(data);
+	};
+  const getuser = async () => {
+    const user = await authService.getCurrentUser();
+    console.log(user);
+  }
+	return (
+		<div className="App">
+			<h1>Hello</h1>
+			<button onClick={() => createUser(data)}>Create User</button>
+      <button onClick={getuser}>Get User</button>
+		</div>
+	);
 }
 
 export default App;
