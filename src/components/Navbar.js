@@ -18,8 +18,8 @@ const Navbar = () => {
 					<Link to="/about" className="text-gray-300 hover:text-white">
 						About
 					</Link>
-					<Link to="/services" className="text-gray-300 hover:text-white">
-						Services
+					<Link to="/products" className="text-gray-300 hover:text-white">
+						Products
 					</Link>
 					<Link to="/contact" className="text-gray-300 hover:text-white">
 						Contact
@@ -29,6 +29,12 @@ const Navbar = () => {
 						className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded"
 					>
 						Sign Up
+					</Link>
+					<Link
+						to="/add-product"
+						className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded"
+					>
+						Add Product
 					</Link>
 				</div>
 				<div className="md:hidden flex items-center">
