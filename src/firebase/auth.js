@@ -3,8 +3,9 @@ import {
 	onAuthStateChanged,
 	signInWithEmailAndPassword,
 	signOut,
+	signInWithRedirect,
 } from "firebase/auth";
-import { auth } from "../conf/firebaseConf";
+import { auth, provider } from "../conf/firebaseConf";
 
 export class AuthService {
 	async createAccount({ email, password }) {
@@ -16,7 +17,6 @@ export class AuthService {
 			);
 			return userCredential.user;
 		} catch (error) {
-			console.log("Firebase Error :: createUser :: error: ", error);
 			throw new Error(error.message);
 		}
 	}
@@ -30,7 +30,6 @@ export class AuthService {
 			);
 			return userCredential.user;
 		} catch (error) {
-			console.log("Firebase Error :: login :: error: ", error);
 			throw new Error(error.message);
 		}
 	}
@@ -40,20 +39,31 @@ export class AuthService {
 			await signOut(auth);
 		} catch (error) {
 			console.log("Firebase Error :: logout :: error: ", error);
-			throw new Error(error.message);
 		}
 	}
 
-	getCurrentUser() {
-		return new Promise((resolve, reject) => {
-			onAuthStateChanged(auth, (user) => {
-				if (user) {
+	async getCurrentUser() {
+		try {
+			const user = await new Promise((resolve) => {
+				const unsubscribe = onAuthStateChanged(auth, (user) => {
+					unsubscribe();
 					resolve(user);
-				} else {
-					reject(new Error("No user is currently logged in."));
-				}
+				});
 			});
-		});
+	
+			return user || null;
+		} catch (error) {
+			return null;
+		}
+	}
+
+	async registerWithGoogle() {
+		try {
+			const userCredential = await signInWithRedirect(auth, provider);
+			return userCredential.user;
+		} catch (error) {
+			throw new Error(error.message);
+		}
 	}
 }
 
