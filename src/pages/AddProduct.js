@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import service from "../firebase/config";
 import { useNavigate } from "react-router-dom";
+import {v4 as uuidv4} from 'uuid';
 
 const AddProduct = () => {
 	const [name, setName] = useState("");
 	const [price, setPrice] = useState("");
 	const [description, setDescription] = useState("");
 	const [image, setImage] = useState(null);
+	const [ratings, setRatings] = useState(0)
 	const [loading, setLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -19,10 +21,12 @@ const AddProduct = () => {
 		e.preventDefault();
 		setLoading(true);
 		const data = await service.createProduct({
+			id: uuidv4(),
 			name,
 			description,
 			price,
 			image,
+			ratings
 		});
 		setLoading(false);
 		navigate("/");
@@ -65,6 +69,25 @@ const AddProduct = () => {
 							className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-gray-300 rounded-md"
 							value={price}
 							onChange={(e) => setPrice(e.target.value)}
+							required
+						/>
+					</div>
+					<div className="mb-4">
+						<label
+							htmlFor="ratings"
+							className="block text-gray-300 mb-2"
+						>
+							Ratings
+						</label>
+						<input
+							id="ratings"
+							type="number"
+							step="0.01"
+							className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-gray-300 rounded-md"
+							value={ratings}
+							min="0"
+							max="5"
+							onChange={(e) => setRatings(e.target.value)}
 							required
 						/>
 					</div>
