@@ -40,9 +40,9 @@ const Products = () => {
 	}
 
 	return (
-		<div className="flex flex-wrap items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-6">
+		<div className="flex mt-12 flex-wrap items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-6">
 			{products.map((product) => (
-				<ProductCard key={product.id} product={product.data()} id={product.id} />
+				<ProductCard key={product.data().id} product={product.data()} />
 			))}
 		</div>
 	);

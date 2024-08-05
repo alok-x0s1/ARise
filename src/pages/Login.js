@@ -1,22 +1,50 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import authService from "../firebase/auth";
+import { login } from "../features/authSlice";
+import { useDispatch } from "react-redux";
+import Toaster from "../components/Toaster";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
-    const navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState(false);
+
+	const navigate = useNavigate();
+	const dispatch = useDispatch()
+
 	const handleSignup = async (e) => {
 		e.preventDefault();
+		setError("");
+		try {
+			const user = await authService.login({ email, password });
+			if (user) {
+				const userData = await authService.getCurrentUser();
+				if (userData) dispatch(login(userData));
+				navigate("/")
+			}
+		} catch (error) {
+			setError(error.message.replace("Firebase: Error ", ""));
+		}
 	};
+
+	const loginWithGoogle = async () => {
+		setError("")
+		try {
+			const user = await authService.registerWithGoogle();
+			if (user) {
+				const userData = await authService.getCurrentUser();
+				if (userData) dispatch(login(userData));
+				navigate("/");
+			}
+		} catch (error) {
+			setError(error.message.replace("Firebase: Error ", ""));
+		}
+	}
 
 	return (
 		<div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700">
-			{error && (
-				<div className="absolute top-8 left-1/2 transform -translate-x-1/2 p-4 bg-red-600 text-white">
-					Something went wrong
-				</div>
-			)}
+			{error && <Toaster status="error" message={error} />}
 			<div className="w-full max-w-md p-8 space-y-8 bg-gray-900 rounded-lg shadow-lg animate-fade-in">
 				<Link
 					to={"/"}
@@ -115,9 +143,7 @@ const Login = () => {
 							</span>
 							Login
 						</button>
-						<button
-							className="relative flex justify-center w-full px-4 py-2 mt-4 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md group hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-						>
+						<button onClick={loginWithGoogle} className="relative flex justify-center w-full px-4 py-2 mt-4 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md group hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
 							<span className="absolute inset-y-0 left-0 flex items-center pl-3">
 								<svg
 									className="w-5 h-5 text-red-500 group-hover:text-red-400"

@@ -11,7 +11,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white">
+        <div className="flex pt-24 flex-col min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white">
             <main className="flex-grow">
                 <section className="py-16 px-4">
                     <div className="container mx-auto text-center">
