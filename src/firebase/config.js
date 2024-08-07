@@ -1,19 +1,28 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../conf/firebaseConf";
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	doc,
+	getDoc,
+	getDocs,
+	query,
+	setDoc,
+	where,
+} from "firebase/firestore";
 
 export class Service {
 	async createProduct({ name, description, price, image, id, ratings }) {
 		try {
 			const imagePath = await this.uploadImage(image);
-            const imageUrl = await this.getImage(imagePath);
+			const imageUrl = await this.getImage(imagePath);
 			const product = await addDoc(collection(db, "products"), {
 				id,
 				name,
 				description,
-				price,
+				price: Number(price),
 				image: imageUrl,
-				ratings,
+				ratings: Number(ratings),
 				// user: {
 				//     userId: user.id,
 				//     name: user.displayName,
@@ -68,11 +77,47 @@ export class Service {
 			const q = query(collection(db, "products"), where("id", "==", id));
 			const querySnapshot = await getDocs(q);
 			const product = querySnapshot.docs[0].data();
-			if(product) {
+			if (product) {
 				return product;
 			}
 		} catch (error) {
 			throw new Error(error.message);
+		}
+	}
+
+	async createOrder(userId, paymentId, items, amount) {
+		try {
+			await setDoc(doc(db, "users", userId, "orders", paymentId), {
+				items,
+				amount,
+				paymentId,
+				createdAt: new Date(),
+			});
+		} catch (error) {
+			console.error("Firebase Error :: createOrder :: error:", error);
+			throw new Error("Failed to create order: " + error.message);
+		}
+	}
+
+	async getOrderData(userId) {
+		try {
+			console.log(`Fetching orders for user: ${userId}`);
+			const ordersCollection = collection(db, "users", userId, "orders");
+			const snapshot = await getDocs(ordersCollection);
+	
+			if (snapshot.empty) {
+				console.log("No orders found.");
+				return [];
+			}
+	
+			const orders = snapshot.docs.map((doc) => ({
+				id: doc.id,
+				...doc.data(),
+			}));
+			return orders;
+		} catch (error) {
+			console.error("Firebase Error :: getOrderData :: error:", error);
+			return [];
 		}
 	}
 }
