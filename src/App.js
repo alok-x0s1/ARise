@@ -15,10 +15,9 @@ import SingleProduct from "./pages/SingleProduct";
 import { loadStripe } from "@stripe/stripe-js";
 import Checkout from "./pages/Checkout";
 import { Elements } from "@stripe/react-stripe-js";
+import Orders from "./pages/Orders";
 
-const promise = loadStripe(
-	"pk_test_51Pjw6mLZoIGHAt2AU3FiaIgs9LidQjq4HnQSME7nirpWGT4iR2fgfTr6yehL8p8lkNZPjl00WFXm6xrbf09Srwib00yFwMSkOB"
-);
+const promise = loadStripe(String(process.env.STRIPE_SECRET_KEY));
 
 const App = () => {
 	return (
@@ -39,9 +38,12 @@ const App = () => {
 						</Elements>
 					}
 				/>
-				<Route path="/add-product" element={<AddProduct />} />
+				{process.env.NODE_ENV === "development" && (
+					<Route path="/add-product" element={<AddProduct />} />
+				)}
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/cart" element={<Cart />} />
+				<Route path="/orders" element={<Orders />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 			<Footer />
