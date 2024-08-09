@@ -84,7 +84,7 @@ const SingleProduct = () => {
 								{product.description}
 							</p>
 							<p className="text-2xl font-bold mb-4 text-indigo-600">
-								&#x20b9; {Number(product.price).toFixed(2)}
+								$ {Number(product.price).toFixed(2)}
 							</p>
 							<div className="flex space-x-4">
 								<button
