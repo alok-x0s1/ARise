@@ -8,6 +8,7 @@ const AddProduct = () => {
 	const [price, setPrice] = useState("");
 	const [description, setDescription] = useState("");
 	const [image, setImage] = useState(null);
+	const [modelFile, setModelFile] = useState(null)
 	const [ratings, setRatings] = useState(0)
 	const [loading, setLoading] = useState(false);
 
@@ -16,6 +17,11 @@ const AddProduct = () => {
 	const handleImageChange = (e) => {
 		setImage(e.target.files[0]);
 	};
+
+	const handleModelChange = (e) => {
+		console.log(e.target.files[0]);
+		setModelFile(e.target.files[0]);
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -26,14 +32,15 @@ const AddProduct = () => {
 			description,
 			price,
 			image,
-			ratings
+			ratings,
+			modelFile
 		});
 		setLoading(false);
 		navigate("/");
 	};
 
 	return (
-		<div className="flex items-center mt-12 justify-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white">
+		<div className="flex items-center pt-24 justify-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white">
 			<div className="w-full max-w-md p-8 bg-gray-900 rounded-lg shadow-lg">
 				<h1 className="text-3xl font-bold mb-6 text-center">
 					Add New Product
@@ -120,6 +127,21 @@ const AddProduct = () => {
 							accept="image/*"
 							className="w-full text-gray-300 bg-gray-800"
 							onChange={handleImageChange}
+							required
+						/>
+					</div>
+					<div className="mb-4">
+						<label
+							htmlFor="ModelFile"
+							className="block text-gray-300 mb-2"
+						>
+							ModelFile
+						</label>
+						<input
+							id="ModelFile"
+							type="file"
+							className="w-full text-gray-300 bg-gray-800"
+							onChange={handleModelChange}
 							required
 						/>
 					</div>
