@@ -1,70 +1,129 @@
-# Getting Started with Create React App
+# ARise - Augmented Reality E-Commerce Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ARise is a cutting-edge e-commerce platform built with React, designed to bring an immersive shopping experience to users by incorporating Augmented Reality (AR). With ARise, users can view and place products as 3D objects in their real-world environment, making online shopping more interactive and engaging.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Augmented Reality Integration**: Visualize products in your real-world space using AR technology.
+- **React Frontend**: A responsive, dynamic user interface built with React.
+- **Firebase Backend**: Real-time database, authentication, and storage powered by Firebase.
+- **Stripe Payments**: Secure and efficient payment processing with Stripe.
+- **State Management with Redux**: Centralized state management for user info and cart items.
+- **Axios for API Requests**: Simplified HTTP requests to fetch data from the backend.
+- **Firebase Cloud Functions**: Secure serverless functions to generate Stripe clientSecrets.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React**: A JavaScript library for building user interfaces.
+- **Firebase**: Backend-as-a-Service for real-time database, authentication, and storage.
+- **Stripe**: Payment processing platform to handle transactions.
+- **Firebase Cloud Functions**: Serverless backend functions for secure payment processing.
+- **Redux**: A predictable state container for managing application state.
+- **Axios**: Promise-based HTTP client for making requests to the backend.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Make sure you have the following installed:
 
-### `npm run build`
+- Node.js (v14 or above)
+- npm (v6 or above)
+- Firebase CLI
+- Stripe account
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/alok-x0s1/ARise.git
+   cd ARise
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+   After this you should have enough knowledge about firebase, firebase CLI, storage, and database
 
-### `npm run eject`
+3. **Create a `.env` file** in the root directory and add your environment variables:
+   ```plaintext
+   REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+   REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   REACT_APP_FIREBASE_PROJECT_ID=your_firebase_project_id
+   REACT_APP_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+   REACT_APP_FIREBASE_APP_ID=your_firebase_app_id
+   REACT_APP_STRIPE_SECRET_KEY=your_stripe_secret_key
+   REACT_APP_CLOUD_FUNCTION_URL=your_cloud_function_url
+   ```   
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Set up Firebase**:
+   - Create a Firebase project and configure Firebase services (Authentication, Firestore, and Storage).
+   - Set up Firebase Cloud Functions:
+     ```bash
+     cd functions
+     npm install
+     firebase deploy --only functions
+     cd ..
+     ```
+    - Or you can also run firebase cloud function locally
+    ```bash
+     cd functions
+     npm install
+     firebase emulator:start
+     ```
+     By default port
+     ```URL
+     http://127.0.0.1:5001/[Something starts like this]
+     ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. **Set up Stripe**:
+   - Get your Stripe API keys from the [Stripe Dashboard](https://dashboard.stripe.com/apikeys).
+   - Add your Stripe keys to your Firebase Cloud Functions environment.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+6. **Start the development server**:
+   ```bash
+   npm start
+   ```
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+To deploy the project, you can use Firebase Hosting:
 
-### `npm run build` fails to minify
+1. **Build the project**:
+   ```bash
+   npm run build
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. **Deploy to Firebase**:
+   ```bash
+   firebase deploy --only hosting
+   ```
+
+## Folder Structure
+
+```plaintext
+arise/
+│
+├── public/                 # Public assets
+├── src/
+│   ├── components/         # React components
+│   ├── redux/              # Redux setup (actions, reducers, store)
+│   ├── pages/              # React pages (Home, Product, Cart, etc.)
+│   ├── services/           # Axios service for API calls
+│   ├── App.js              # Main App component
+│   ├── index.js            # Entry point for the application
+│   └── firebase.js         # Firebase configuration
+├── functions/              # Firebase Cloud Functions
+│   ├── index.js            # Main Cloud Functions file
+│   ├── .env                # Environment variables for Cloud Functions
+│   └── package.json        # Node.js dependencies for Cloud Functions
+├── .env                    # Environment variables for the frontend
+├── .gitignore              # Git ignore file
+├── firebase.json           # Firebase configuration
+├── package.json            # Node.js dependencies for the frontend
+├── README.md               # Project documentation
+└── ...                     # Other project files and folders
+```
+Something like this🔥⚠️
