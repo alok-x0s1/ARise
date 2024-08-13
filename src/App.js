@@ -16,8 +16,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import Checkout from "./pages/Checkout";
 import { Elements } from "@stripe/react-stripe-js";
 import Orders from "./pages/Orders";
+import Product3DView from "./pages/3dView";
 
-const promise = loadStripe(String(process.env.STRIPE_SECRET_KEY));
+const promise = loadStripe(String(process.env.REACT_APP_STRIPE_SECRET_KEY));
 
 const App = () => {
 	return (
@@ -38,13 +39,14 @@ const App = () => {
 						</Elements>
 					}
 				/>
-				{process.env.NODE_ENV === "development" && (
+				{process.env.REACT_APP_MODE === "development" && (
 					<Route path="/add-product" element={<AddProduct />} />
 				)}
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/orders" element={<Orders />} />
 				<Route path="*" element={<NotFound />} />
+				<Route path="/ha" element={<Product3DView />} />
 			</Routes>
 			<Footer />
 		</div>
