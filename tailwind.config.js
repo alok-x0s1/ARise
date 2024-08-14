@@ -5,29 +5,33 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: {
-					DEFAULT: "#1D4ED8", // Main brand color
-					light: "#3B82F6", // Lighter shade for hover, etc.
-					dark: "#1E40AF", // Darker shade for contrast
+					DEFAULT: "#c8c8c8",
+					light: "#D1D5DB",
 				},
-				secondary: {
-					DEFAULT: "#D97706", // Secondary brand color
-					light: "#F59E0B", // Lighter shade for hover, etc.
-					dark: "#B45309", // Darker shade for contrast
+				secondary: "#000000",
+				hover: {
+					light: "#f6f6f6",
+					dark: "#333333",
 				},
-				accent: {
-					DEFAULT: "#10B981", // Accent color
-					light: "#34D399", // Lighter shade for hover, etc.
-					dark: "#059669", // Darker shade for contrast
+				red: {
+					DEFAULT: "#DC2626",
+					secondary: "#B91C1C",
 				},
-				neutral: {
-					DEFAULT: "#374151", // Neutral gray color
-					light: "#6B7280", // Lighter shade for text, etc.
-					dark: "#1F2937", // Darker shade for background, etc.
+				blue: {
+					DEFAULT: "#4F46E5",
+					secondary: "#4338CA",
 				},
-				primary: "#000000", // Black for backgrounds
-				secondary: "#ffffff", // White for text and main elements
-				hoverBackground: "#333333", // Darker black for hover effects
-				hoverText: "#ffffff",
+				green: {
+					DEFAULT: "#34d399",
+					secondary: "#6ee7b7",
+				},
+				orange: {
+					DEFAULT: "#fb923c",
+					secondary: "#fdba74",
+				},
+			},
+			borderColor: {
+				primary: "#c8c8c8",
 			},
 			animation: {
 				ping: "ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite",
