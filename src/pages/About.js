@@ -2,9 +2,9 @@ import React from 'react';
 
 const About = () => {
     return (
-        <div className="flex flex-col pt-28 items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-6">
-            <h1 className="text-5xl font-extrabold text-white mb-6">About Us</h1>
-            <div className="max-w-4xl text-center text-gray-400 space-y-4">
+        <div className="flex flex-col pt-28 items-center justify-center min-h-screen bg-primary p-6">
+            <h1 className="text-5xl font-extrabold text-secondary mb-6">About Us</h1>
+            <div className="max-w-4xl text-center text-secondary/70 space-y-4">
                 <p>
                     Welcome to our revolutionary e-commerce platform! We are at the forefront of merging traditional online shopping with cutting-edge technology. Our platform allows you to not only view products in a conventional format but also in immersive 3D models and augmented reality. This ensures you get a comprehensive understanding of the product before making a purchase.
                 </p>

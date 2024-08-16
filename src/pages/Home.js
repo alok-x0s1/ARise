@@ -4,13 +4,11 @@ import Products from "./Products";
 
 const Home = () => {
 	return (
-		<div className="flex flex-col min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white">
+		<div className="flex flex-col min-h-screen bg-primary text-secondary">
 			<main className="flex-grow">
 				<section
 					className="relative flex items-center justify-center h-screen bg-cover bg-center"
-					style={{ backgroundImage: `url('./background.webp')` }}
 				>
-					<div className="absolute inset-0 bg-black opacity-50"></div>
 					<div className="relative z-10 text-center">
 						<h1 className="text-5xl font-extrabold mb-4">
 							Welcome to ARise
@@ -21,16 +19,15 @@ const Home = () => {
 						</p>
 						<Link
 							to="/signup"
-							className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-md text-lg"
+							className="inline-block bg-secondary hover:bg-secondary/80 duration-300 text-white font-bold py-3 px-6 rounded-md text-lg"
 						>
 							Get Started
 						</Link>
 					</div>
 				</section>
-				<h1 className="text-5xl text-center mt-12">Our Products</h1>
 				<Products />
 
-				<section className="py-16 px-4 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700">
+				<section className="py-16 px-4 bg-primary text-secondary">
 					<div className="container mx-auto text-center">
 						<h2 className="text-4xl font-bold mb-8">
 							Testimonials
@@ -39,20 +36,20 @@ const Home = () => {
 							{testimonials.map((testimonial, index) => (
 								<div
 									key={index}
-									className="p-8 bg-gray-800 rounded-lg shadow-lg"
+									className="p-8 rounded-lg shadow-lg border-2 border-gray-400"
 								>
 									<img
 										src={testimonial.image}
 										alt={testimonial.customer}
 										className="w-16 h-16 rounded-full mx-auto mb-4"
 									/>
-									<p className="text-gray-400 mb-4 text-start">
+									<p className="mb-4 text-start">
 										"{testimonial.quote}"
 									</p>
 									<h3 className="text-xl font-bold">
 										{testimonial.customer}
 									</h3>
-									<p className="text-gray-400">
+									<p className="text-secondary/80">
 										{testimonial.designation}
 									</p>
 								</div>
@@ -61,16 +58,16 @@ const Home = () => {
 					</div>
 				</section>
 
-				<section className="py-16 px-4 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700">
+				<section className="py-16 px-4 bg-primary text-secondary">
 					<div className="container mx-auto text-center">
 						<h2 className="text-4xl font-bold mb-8">Contact Us</h2>
-						<p className="text-gray-400 mb-8">
+						<p className="text-secondary/80 mb-8">
 							Have any questions or feedback? We'd love to hear
 							from you.
 						</p>
 						<Link
 							to="/contact"
-							className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-md text-lg"
+							className="inline-block bg-secondary hover:bg-secondary/80 duration-300 text-white font-bold py-3 px-6 rounded-md text-lg"
 						>
 							Contact Us
 						</Link>
