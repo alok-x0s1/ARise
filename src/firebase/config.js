@@ -12,16 +12,28 @@ import {
 } from "firebase/firestore";
 
 export class Service {
-	async createProduct({ name, description, price, image, id, ratings }) {
+	async createProduct({
+		name,
+		description,
+		price,
+		image,
+		id,
+		ratings,
+		modelFile,
+	}) {
 		try {
 			const imagePath = await this.uploadImage(image);
+			const modelPath = await this.uploadImage(modelFile);
+
 			const imageUrl = await this.getImage(imagePath);
+			const modelUrl = await this.getImage(modelPath);
 			const product = await addDoc(collection(db, "products"), {
 				id,
 				name,
 				description,
 				price: Number(price),
 				image: imageUrl,
+				modelUrl,
 				ratings: Number(ratings),
 				// user: {
 				//     userId: user.id,
@@ -101,15 +113,14 @@ export class Service {
 
 	async getOrderData(userId) {
 		try {
-			console.log(`Fetching orders for user: ${userId}`);
 			const ordersCollection = collection(db, "users", userId, "orders");
 			const snapshot = await getDocs(ordersCollection);
-	
+
 			if (snapshot.empty) {
 				console.log("No orders found.");
 				return [];
 			}
-	
+
 			const orders = snapshot.docs.map((doc) => ({
 				id: doc.id,
 				...doc.data(),
