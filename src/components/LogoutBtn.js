@@ -10,7 +10,7 @@ const LogoutBtn = () => {
 	return (
 		<button 
         onClick={handleLogout}
-        className="bg-red-600 hover:bg-red-700 duration-300 text-white px-4 py-2 rounded">
+        className="bg-red hover:bg-red-secondary duration-300 text-white px-4 py-2 rounded">
 			Logout
 		</button>
 	);

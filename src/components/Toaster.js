@@ -14,10 +14,10 @@ const Toaster = ({ message, status }) => {
   if (!show) return null;
 
   return (
-    <div className={`fixed bottom-7 right-4 w-80 p-4 rounded-md shadow-lg ${status === 'error' ? 'bg-red-500' : 'bg-blue-500'} text-white`}>
+    <div className={`fixed bottom-7 right-4 w-80 p-4 rounded-md shadow-lg ${status === 'error' ? 'bg-red' : 'bg-blue'} text-primary`}>
       <p>{message}</p>
-      <div className="relative w-full h-1 mt-2 bg-white">
-        <div className="absolute top-0 left-0 h-full bg-gray-800 animate-reduce-width"></div>
+      <div className="relative w-full h-1 mt-2 bg-secondary">
+        <div className="absolute top-0 left-0 h-full bg-primary animate-reduce-width"></div>
       </div>
     </div>
   );
