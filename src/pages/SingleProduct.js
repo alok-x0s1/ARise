@@ -12,7 +12,7 @@ const SingleProduct = () => {
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
-	const navigatae = useNavigate();
+	const navigate = useNavigate();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	const authStatus = useSelector((state) => state.auth.status);
@@ -56,7 +56,7 @@ const SingleProduct = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-800 py-10 pt-36">
+		<div className="min-h-screen bg-primary py-10 pt-36 text-secondary">
 			{error && <Toaster status="error" message={error} />}
 			{loading ? (
 				<Loader />
@@ -64,48 +64,51 @@ const SingleProduct = () => {
 				""
 			) : (
 				<div className="container mx-auto p-6">
-					<div className="flex flex-col items-center">
-						<img
-							src={product.image}
-							alt={product.name}
-							className="w-full md:w-3/4 md:h-96 object-cover rounded-lg mb-6 border border-white md:mb-0 transition-transform duration-500 transform hover:scale-105"
-						/>
-						<div className="md:ml-6 flex-1 text-start mt-6">
-							<h1 className="text-4xl font-bold mb-4 text-gray-200">
+					<div className="flex flex-col md:flex-row items-center md:items-start">
+						<div className="md:w-1/2 flex-shrink-0 mb-6 md:mb-0 w-full">
+							<img
+								src={product.image}
+								alt={product.name}
+								className="w-full h-full object-cover rounded-lg border border-white transition-transform duration-500 transform hover:scale-105"
+							/>
+						</div>
+
+						<div className="md:ml-10 flex-1 text-start w-full">
+							<h1 className="text-3xl md:text-4xl font-bold mb-4">
 								{product.name}
 							</h1>
-							<div className="ratings flex">
+							<div className="ratings flex mb-4">
 								{product.ratings > 0 &&
 									Array.from({ length: product.ratings }).map(
 										(_, i) => <span key={i}>⭐</span>
 									)}
 							</div>
-							<p className="text-gray-100 mb-4">
+							<p className="text-secondary/80 mb-4">
 								{product.description}
 							</p>
-							<p className="text-2xl font-bold mb-4 text-indigo-600">
+							<p className="text-xl md:text-2xl font-bold mb-6 text-blue">
 								$ {Number(product.price).toFixed(2)}
 							</p>
-							<div className="flex space-x-4">
+							<div className="flex flex-wrap items-center sm:space-x-4 space-y-4 sm:space-y-0">
 								<button
 									onClick={
 										isLoggedIn
 											? handleAddToCart
-											: () => navigatae("/login")
+											: () => navigate("/login")
 									}
-									className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded transition-colors duration-300"
+									className="bg-blue hover:bg-blue-secondary text-white py-2 px-4 rounded transition-colors duration-300 w-fit"
 								>
 									Add to Cart
 								</button>
 								<Link
 									to={`/3d-view/${product.id}`}
-									className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors duration-300"
+									className="bg-red hover:bg-red-secondary text-white py-2 px-4 rounded transition-colors duration-300 w-fit text-center mx-4"
 								>
 									View in 3D
 								</Link>
 								<Link
 									to={`/ar-view/${product.id}`}
-									className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition-colors duration-300"
+									className="bg-green hover:bg-green-secondary text-white py-2 px-4 rounded transition-colors duration-300 w-fit text-center"
 								>
 									View in AR
 								</Link>

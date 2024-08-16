@@ -19,7 +19,6 @@ const AddProduct = () => {
 	};
 
 	const handleModelChange = (e) => {
-		console.log(e.target.files[0]);
 		setModelFile(e.target.files[0]);
 	}
 
@@ -40,8 +39,8 @@ const AddProduct = () => {
 	};
 
 	return (
-		<div className="flex items-center pt-24 justify-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white">
-			<div className="w-full max-w-md p-8 bg-gray-900 rounded-lg shadow-lg">
+		<div className="flex items-center pt-24 justify-center min-h-screen bg-primary text-secondary pb-6">
+			<div className="w-full max-w-md p-8 border-2 border-gray-400 rounded-lg shadow-lg">
 				<h1 className="text-3xl font-bold mb-6 text-center">
 					Add New Product
 				</h1>
@@ -49,23 +48,23 @@ const AddProduct = () => {
 					<div className="mb-4">
 						<label
 							htmlFor="name"
-							className="block text-gray-300 mb-2"
+							className="block mb-2"
 						>
 							Name
 						</label>
 						<input
 							id="name"
 							type="text"
-							className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-gray-300 rounded-md"
+							className="relative block w-full px-3 py-2 border border-gray-400 placeholder-secondary bg-primary-light focus:outline-none focus:ring-red focus:border-red focus:z-10 sm:text-sm rounded-t-md"
 							value={name}
-							onChange={(e) => setName(e.target.value)}
+							placeholder="Product Name"
 							required
 						/>
 					</div>
 					<div className="mb-4">
 						<label
 							htmlFor="price"
-							className="block text-gray-300 mb-2"
+							className="block mb-2"
 						>
 							Price
 						</label>
@@ -73,7 +72,7 @@ const AddProduct = () => {
 							id="price"
 							type="number"
 							step="0.01"
-							className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-gray-300 rounded-md"
+							className="relative block w-full px-3 py-2 border border-gray-400 placeholder-secondary bg-primary-light focus:outline-none focus:ring-red focus:border-red focus:z-10 sm:text-sm rounded-t-md"
 							value={price}
 							onChange={(e) => setPrice(e.target.value)}
 							required
@@ -82,7 +81,7 @@ const AddProduct = () => {
 					<div className="mb-4">
 						<label
 							htmlFor="ratings"
-							className="block text-gray-300 mb-2"
+							className="block mb-2"
 						>
 							Ratings
 						</label>
@@ -90,7 +89,7 @@ const AddProduct = () => {
 							id="ratings"
 							type="number"
 							step="0.01"
-							className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-gray-300 rounded-md"
+							className="relative block w-full px-3 py-2 border border-gray-400 placeholder-secondary bg-primary-light focus:outline-none focus:ring-red focus:border-red focus:z-10 sm:text-sm rounded-t-md"
 							value={ratings}
 							min="0"
 							max="5"
@@ -101,13 +100,13 @@ const AddProduct = () => {
 					<div className="mb-4">
 						<label
 							htmlFor="description"
-							className="block text-gray-300 mb-2"
+							className="block mb-2"
 						>
 							Description
 						</label>
 						<textarea
 							id="description"
-							className="w-full px-3 py-2 border border-gray-700 bg-gray-800 text-gray-300 rounded-md"
+							className="relative block w-full px-3 py-2 border border-gray-400 placeholder-secondary bg-primary-light focus:outline-none focus:ring-red focus:border-red focus:z-10 sm:text-sm rounded-t-md"
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
 							rows="4"
@@ -117,7 +116,7 @@ const AddProduct = () => {
 					<div className="mb-4">
 						<label
 							htmlFor="image"
-							className="block text-gray-300 mb-2"
+							className="block mb-2"
 						>
 							Image
 						</label>
@@ -125,7 +124,7 @@ const AddProduct = () => {
 							id="image"
 							type="file"
 							accept="image/*"
-							className="w-full text-gray-300 bg-gray-800"
+							className="relative block w-full px-3 py-2 border border-gray-400 placeholder-secondary bg-primary-light focus:outline-none focus:ring-red focus:border-red focus:z-10 sm:text-sm rounded-t-md"
 							onChange={handleImageChange}
 							required
 						/>
@@ -133,21 +132,21 @@ const AddProduct = () => {
 					<div className="mb-4">
 						<label
 							htmlFor="ModelFile"
-							className="block text-gray-300 mb-2"
+							className="block mb-2"
 						>
 							ModelFile
 						</label>
 						<input
 							id="ModelFile"
 							type="file"
-							className="w-full text-gray-300 bg-gray-800"
+							className="relative block w-full px-3 py-2 border border-gray-400 placeholder-secondary bg-primary-light focus:outline-none focus:ring-red focus:border-red focus:z-10 sm:text-sm rounded-t-md"
 							onChange={handleModelChange}
 							required
 						/>
 					</div>
 					<button
 						type="submit"
-						className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md"
+						className="w-full bg-blue hover:bg-blue-secondary duration-300 text-white font-bold py-2 px-4 rounded-md"
 						disabled={loading}
 					>
 						{loading ? "Adding..." : "Add Product"}
