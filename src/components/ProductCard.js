@@ -43,7 +43,7 @@ const ProductCard = ({ product }) => {
 					{product.description.slice(0, 100)}...
 				</p>
 			</div>
-			<div className="px-6 py-4 flex gap-4">
+			<div className="px-6 py-4 text-sm lg:text-base flex gap-4">
 				<Link
 					to={`/products/${id}`}
 					className="bg-blue hover:bg-blue-secondary text-white duration-300 py-2 px-4 rounded"

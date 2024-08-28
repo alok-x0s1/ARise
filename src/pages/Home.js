@@ -18,7 +18,7 @@ const Home = () => {
 							and service.
 						</p>
 						<Link
-							to="/signup"
+							to="/products"
 							className="inline-block bg-secondary hover:bg-secondary/80 duration-300 text-white font-bold py-3 px-6 rounded-md text-lg"
 						>
 							Get Started

@@ -39,7 +39,7 @@ const Products = () => {
 	return (
 		<div className="mt-12 min-h-screen bg-primary p-6">
 			<h1 className="text-3xl md:text-4xl font-bold text-secondary py-12 text-center">
-				Our Products :)
+				Our Products
 			</h1>
 			<div className="flex flex-wrap items-center justify-center gap-6">
 				{products.map((product) => (

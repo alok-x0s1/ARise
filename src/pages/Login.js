@@ -4,11 +4,13 @@ import authService from "../firebase/auth";
 import { login } from "../features/authSlice";
 import { useDispatch } from "react-redux";
 import Toaster from "../components/Toaster";
+import { extractUserData } from "../utils/extractData";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -16,20 +18,26 @@ const Login = () => {
 	const handleSignup = async (e) => {
 		e.preventDefault();
 		setError("");
+		setIsLoading(true);
 		try {
 			const user = await authService.login({ email, password });
 			if (user) {
 				const userData = await authService.getCurrentUser();
-				if (userData) dispatch(login(userData));
+				const data = extractUserData(userData);
+				console.log(data);
+				if (userData) dispatch(login(data));
 				navigate("/");
 			}
 		} catch (error) {
 			setError(error.message.replace("Firebase: Error ", ""));
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
 	const loginWithGoogle = async () => {
 		setError("");
+		setIsLoading(true);
 		try {
 			const user = await authService.registerWithGoogle();
 			if (user) {
@@ -39,6 +47,8 @@ const Login = () => {
 			}
 		} catch (error) {
 			setError(error.message.replace("Firebase: Error ", ""));
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -123,6 +133,7 @@ const Login = () => {
 					</div>
 					<div>
 						<button
+							disabled={isLoading}
 							type="submit"
 							className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue border border-transparent rounded-md group hover:bg-blue-secondary duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 						>
@@ -141,9 +152,10 @@ const Login = () => {
 									/>
 								</svg>
 							</span>
-							Login
+							{isLoading ? "Loading..." : "Sign up"}
 						</button>
 						<button
+							disabled={isLoading}
 							onClick={loginWithGoogle}
 							className="relative flex justify-center w-full px-4 py-2 mt-4 text-sm font-medium text-white bg-red border border-transparent rounded-md group hover:bg-red-secondary duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
 						>
@@ -162,7 +174,7 @@ const Login = () => {
 									/>
 								</svg>
 							</span>
-							Login with Google
+							Sign in with Google
 						</button>
 					</div>
 				</form>

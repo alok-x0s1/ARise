@@ -19,21 +19,19 @@ export class Service {
 		image,
 		id,
 		ratings,
-		modelFile,
 	}) {
 		try {
 			const imagePath = await this.uploadImage(image);
-			const modelPath = await this.uploadImage(modelFile);
-
 			const imageUrl = await this.getImage(imagePath);
-			const modelUrl = await this.getImage(modelPath);
+			
+			// const modelPath = await this.uploadImage(modelFile);
+			// const modelUrl = await this.getImage(modelPath);
 			const product = await addDoc(collection(db, "products"), {
 				id,
 				name,
 				description,
 				price: Number(price),
 				image: imageUrl,
-				modelUrl,
 				ratings: Number(ratings),
 				// user: {
 				//     userId: user.id,

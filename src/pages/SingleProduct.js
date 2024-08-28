@@ -106,12 +106,12 @@ const SingleProduct = () => {
 								>
 									View in 3D
 								</Link>
-								<Link
+								{/* <Link
 									to={`/ar-view/${product.id}`}
 									className="bg-green hover:bg-green-secondary text-white py-2 px-4 rounded transition-colors duration-300 w-fit text-center"
 								>
 									View in AR
-								</Link>
+								</Link> */}
 							</div>
 						</div>
 					</div>

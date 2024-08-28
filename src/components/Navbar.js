@@ -73,14 +73,6 @@ const Navbar = () => {
 								Login
 							</Link>
 						)}
-						{process.env.NODE_ENV === "development" && (
-							<Link
-								to="/add-product"
-								className="bg-blue hover:bg-blue-secondary duration-300 text-white px-4 py-2 rounded"
-							>
-								Add Product
-							</Link>
-						)}
 						<Link
 							to={"/cart"}
 							className="flex text-secondary gap-1"
@@ -131,63 +123,64 @@ const Navbar = () => {
 			</div>
 			{isMenuOpen && (
 				<div className="md:hidden bg-primary border shadow-md rounded-lg text-center py-4 space-y-2 h-1/2 fixed p-12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2/3">
+				<Link
+				  to="/"
+				  className="block pt-2 text-secondary hover:text-red duration-300"
+				  onClick={toggleMenu}
+				>
+				  Home
+				</Link>
+				<Link
+				  to={"/cart"}
+				  className="flex items-center justify-center text-secondary gap-1 text-center w-full"
+				  onClick={toggleMenu}
+				>
+				  <FaCartArrowDown className="text-2xl" />
+				  <p>{cartItem}</p>
+				</Link>
+				<Link
+				  to="/products"
+				  className="block pt-2 text-secondary hover:text-red duration-300"
+				  onClick={toggleMenu}
+				>
+				  Products
+				</Link>
+				<Link
+				  to="/orders"
+				  className="block pt-2 text-secondary hover:text-red duration-300"
+				  onClick={toggleMenu}
+				>
+				  Orders
+				</Link>
+				<Link
+				  to="/contact"
+				  className="block pt-2 text-secondary hover:text-red duration-300"
+				  onClick={toggleMenu}
+				>
+				  Contact
+				</Link>
+				{isLoggedIn ? (
+				  <LogoutBtn />
+				) : (
+				  <div>
 					<Link
-						to="/"
-						className="block pt-2 text-secondary hover:text-red duration-300"
-						onClick={toggleMenu}
+					  to="/login"
+					  className="block mt-2 bg-red hover:bg-red/80 duration-300 text-secondary px-4 py-2 rounded"
+					  onClick={toggleMenu}
 					>
-						Home
+					  Login
 					</Link>
 					<Link
-						to={"/cart"}
-						className="flex text-secondary gap-1 text-center w-full"
-						onClick={toggleMenu}
+					  to="/signup"
+					  className="block mt-2 bg-red hover:bg-red/80 duration-300 text-secondary px-4 py-2 rounded"
+					  onClick={toggleMenu}
 					>
-						<FaCartArrowDown className="text-2xl" />
-						<p>{cartItem}</p>
+					  Sign Up
 					</Link>
-					<Link
-						to="/products"
-						className="block pt-2 text-secondary hover:text-red duration-300"
-						onClick={toggleMenu}
-					>
-						Products
-					</Link>
-					<Link
-						to="/orders"
-						className="block pt-2 text-secondary hover:text-red duration-300"
-						onClick={toggleMenu}
-					>
-						Orders
-					</Link>
-					<Link
-						to="/contact"
-						className="block pt-2 text-secondary hover:text-red duration-300"
-						onClick={toggleMenu}
-					>
-						Contact
-					</Link>
-					{isLoggedIn ? (
-						<LogoutBtn />
-					) : (
-						<div>
-							<Link
-								to="/login"
-								className="block mt-2 bg-red hover:bg-red/80 duration-300 text-secondary px-4 py-2 rounded"
-								onClick={toggleMenu}
-							>
-								Login
-							</Link>
-							<Link
-								to="/signup"
-								className="block mt-2 bg-red hover:bg-red/80 duration-300 text-secondary px-4 py-2 rounded"
-								onClick={toggleMenu}
-							>
-								Sign Up
-							</Link>
-						</div>
-					)}
-				</div>
+				  </div>
+				)}
+			  </div>
+			  
 			)}
 		</nav>
 	);

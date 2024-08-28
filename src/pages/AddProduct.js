@@ -32,7 +32,6 @@ const AddProduct = () => {
 			price,
 			image,
 			ratings,
-			modelFile
 		});
 		setLoading(false);
 		navigate("/");
@@ -57,6 +56,7 @@ const AddProduct = () => {
 							type="text"
 							className="relative block w-full px-3 py-2 border border-gray-400 placeholder-secondary bg-primary-light focus:outline-none focus:ring-red focus:border-red focus:z-10 sm:text-sm rounded-t-md"
 							value={name}
+							onChange={(e) => setName(e.target.value)}
 							placeholder="Product Name"
 							required
 						/>
@@ -129,7 +129,7 @@ const AddProduct = () => {
 							required
 						/>
 					</div>
-					<div className="mb-4">
+					{/* <div className="mb-4">
 						<label
 							htmlFor="ModelFile"
 							className="block mb-2"
@@ -143,7 +143,7 @@ const AddProduct = () => {
 							onChange={handleModelChange}
 							required
 						/>
-					</div>
+					</div> */}
 					<button
 						type="submit"
 						className="w-full bg-blue hover:bg-blue-secondary duration-300 text-white font-bold py-2 px-4 rounded-md"

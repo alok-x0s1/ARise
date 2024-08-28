@@ -10,7 +10,10 @@ import { removeAllItems, removeFromCart } from "../features/cartSlice";
 const Checkout = () => {
 	const user = useSelector((state) => state.auth.userData);
 	const cartItems = useSelector((state) => state.cart.cartItems);
-	const totalAmount = cartItems.reduce((total, item) => total + item.price, 0);
+	const totalAmount = cartItems.reduce(
+		(total, item) => total + item.price,
+		0
+	);
 
 	const [error, setError] = useState(null);
 	const [disabled, setDisabled] = useState(true);
@@ -58,14 +61,22 @@ const Checkout = () => {
 
 		setProcessing(true);
 		try {
-			const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-				payment_method: {
-					card: elements.getElement(CardElement),
-				},
-			});
+			const { paymentIntent } = await stripe.confirmCardPayment(
+				clientSecret,
+				{
+					payment_method: {
+						card: elements.getElement(CardElement),
+					},
+				}
+			);
 
 			if (paymentIntent) {
-				await service.createOrder(user?.uid, paymentIntent.id, cartItems, totalAmount);
+				await service.createOrder(
+					user?.uid,
+					paymentIntent.id,
+					cartItems,
+					totalAmount
+				);
 				dispatch(removeAllItems());
 				setSucceeded(true);
 				setError(null);
@@ -101,14 +112,24 @@ const Checkout = () => {
 				</h1>
 
 				<div className="mb-6 p-4 sm:p-6 border-2 border-gray-400 shadow-lg text-secondary rounded-lg w-full lg:w-1/2 mx-auto">
-					<h2 className="text-2xl font-bold mb-4">User Information</h2>
-					<p><strong>Name:</strong> {"John Doe"}</p>
-					<p><strong>Email:</strong> {user.email}</p>
-					<p><strong>Address:</strong> {"1461 Ihso Turnpike UZ"}</p>
+					<h2 className="text-2xl font-bold mb-4">
+						User Information
+					</h2>
+					<p>
+						<strong>Name:</strong> {"John Doe"}
+					</p>
+					<p>
+						<strong>Email:</strong> {user.email}
+					</p>
+					<p>
+						<strong>Address:</strong> {"1461 Ihso Turnpike UZ"}
+					</p>
 				</div>
 
 				<div className="mb-6 p-4 sm:p-6 border-2 border-gray-400 shadow-lg rounded-lg">
-					<h2 className="text-2xl font-bold mb-4">Verify and Review</h2>
+					<h2 className="text-2xl font-bold mb-4">
+						Verify and Review
+					</h2>
 					<div className="flex flex-wrap gap-4">
 						{cartItems.length === 0 ? (
 							<p>Your cart is empty.</p>
@@ -123,15 +144,23 @@ const Checkout = () => {
 										alt={item.name}
 										className="w-full h-40 sm:h-60 object-cover rounded-lg mb-4"
 									/>
-									<h3 className="text-lg sm:text-xl font-bold mb-2">{item.name}</h3>
-									<p className="mb-2">{item.description.substring(0, 100)}...</p>
+									<h3 className="text-lg sm:text-xl font-bold mb-2">
+										{item.name}
+									</h3>
+									<p className="mb-2">
+										{item.description.substring(0, 100)}...
+									</p>
 									<div className="ratings flex mb-2">
 										{item.ratings > 0 &&
-											Array.from({ length: item.ratings }).map((_, i) => (
+											Array.from({
+												length: item.ratings,
+											}).map((_, i) => (
 												<span key={i}>⭐</span>
 											))}
 									</div>
-									<p className="text-blue mb-2">${Number(item.price).toFixed(2)}</p>
+									<p className="text-blue mb-2">
+										${Number(item.price).toFixed(2)}
+									</p>
 									<button
 										className="bg-red hover:bg-red-secondary text-white py-2 px-4 rounded transition-colors duration-300"
 										onClick={() => handleRemove(item.id)}
@@ -144,44 +173,57 @@ const Checkout = () => {
 					</div>
 				</div>
 
-				<div className="p-4 sm:p-6 flex flex-col items-center border-2 border-gray-400 shadow-md rounded-lg">
-					<p className="text-2xl font-bold mb-6">Payment method</p>
-					<form onSubmit={handleSubmit} className="w-full lg:w-1/2 text-secondary text-center">
-						{!clientSecret ? (
-							<p>Loading...</p>
-						) : (
-							<CardElement
-								onChange={handleChange}
-								options={{
-									style: {
-										base: {
-											color: "#000000",
-											fontSize: "16px",
-											"::placeholder": { color: "#000000" },
-										},
-										invalid: { color: "#fa755a" },
-									},
-								}}
-							/>
-						)}
-
-						<div className="flex justify-between items-center mt-8">
-							<h2 className="text-xl sm:text-2xl font-bold">Total Amount</h2>
-							<p className="text-xl sm:text-2xl font-semibold text-blue mt-2">
-								${Number(totalAmount).toFixed(2)}
-							</p>
-						</div>
-
-						<button
-							disabled={processing || disabled || succeeded}
-							className={`w-fit mt-4 bg-blue hover:bg-blue-secondary duration-300 text-white py-3 px-6 rounded transition-transform transform hover:scale-105 ${
-								processing && "opacity-50"
-							}`}
+				{totalAmount > 0 ? (
+					<div className="p-4 sm:p-6 flex flex-col items-center border-2 border-gray-400 shadow-md rounded-lg">
+						<p className="text-2xl font-bold mb-6">
+							Payment method
+						</p>
+						<form
+							onSubmit={handleSubmit}
+							className="w-full lg:w-1/2 text-secondary text-center"
 						>
-							<span>{processing ? <p>Processing</p> : "Buy now"}</span>
-						</button>
-					</form>
-				</div>
+							{!clientSecret ? (
+								<p>Loading...</p>
+							) : (
+								<CardElement
+									onChange={handleChange}
+									options={{
+										style: {
+											base: {
+												color: "#000000",
+												fontSize: "16px",
+												"::placeholder": {
+													color: "#000000",
+												},
+											},
+											invalid: { color: "#fa755a" },
+										},
+									}}
+								/>
+							)}
+
+							<div className="flex justify-between items-center mt-8">
+								<h2 className="text-xl sm:text-2xl font-bold">
+									Total Amount
+								</h2>
+								<p className="text-xl sm:text-2xl font-semibold text-blue mt-2">
+									${Number(totalAmount).toFixed(2)}
+								</p>
+							</div>
+
+							<button
+								disabled={processing || disabled || succeeded}
+								className={`w-fit mt-4 bg-blue hover:bg-blue-secondary duration-300 text-white py-3 px-6 rounded transition-transform transform hover:scale-105 ${
+									processing && "opacity-50"
+								}`}
+							>
+								<span>
+									{processing ? <p>Processing</p> : "Buy now"}
+								</span>
+							</button>
+						</form>
+					</div>
+				) : null}
 			</div>
 		</div>
 	);
