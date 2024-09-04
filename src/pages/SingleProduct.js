@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import service from "../firebase/config";
-import Toaster from "../components/Toaster";
-import Loader from "../components/Loader";
 import { addToCart } from "../features/cartSlice";
+import { Loader, Toaster } from "../components";
 
 const SingleProduct = () => {
 	const { id } = useParams();
@@ -106,12 +105,6 @@ const SingleProduct = () => {
 								>
 									View in 3D
 								</Link>
-								{/* <Link
-									to={`/ar-view/${product.id}`}
-									className="bg-green hover:bg-green-secondary text-white py-2 px-4 rounded transition-colors duration-300 w-fit text-center"
-								>
-									View in AR
-								</Link> */}
 							</div>
 						</div>
 					</div>

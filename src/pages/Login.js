@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import authService from "../firebase/auth";
 import { login } from "../features/authSlice";
 import { useDispatch } from "react-redux";
-import Toaster from "../components/Toaster";
 import { extractUserData } from "../utils/extractData";
+import { Toaster } from "../components";
 
 const Login = () => {
 	const [email, setEmail] = useState("");

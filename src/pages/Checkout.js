@@ -3,17 +3,15 @@ import axios from "../axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Toaster from "../components/Toaster";
 import service from "../firebase/config";
 import { removeAllItems, removeFromCart } from "../features/cartSlice";
+import { Toaster } from "../components";
+import totalAmount from "../utils/totalAmount";
 
 const Checkout = () => {
 	const user = useSelector((state) => state.auth.userData);
 	const cartItems = useSelector((state) => state.cart.cartItems);
-	const totalAmount = cartItems.reduce(
-		(total, item) => total + item.price,
-		0
-	);
+	const totalAmountOfProduct = totalAmount(cartItems);
 
 	const [error, setError] = useState(null);
 	const [disabled, setDisabled] = useState(true);
@@ -31,7 +29,7 @@ const Checkout = () => {
 			return;
 		}
 
-		if (totalAmount <= 0) {
+		if (totalAmountOfProduct <= 0) {
 			setError("Your cart is empty. Please add items to proceed.");
 			return;
 		}
@@ -40,7 +38,7 @@ const Checkout = () => {
 			try {
 				const response = await axios({
 					method: "post",
-					url: `/payments/create?total=${totalAmount * 100}`,
+					url: `/payments/create?total=${totalAmountOfProduct * 100}`,
 				});
 				setClientSecret(response.data.clientSecret);
 			} catch (error) {
@@ -50,7 +48,7 @@ const Checkout = () => {
 		};
 
 		getClientSecret();
-	}, [cartItems, totalAmount, user, navigate]);
+	}, [cartItems, totalAmountOfProduct, user, navigate]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -75,7 +73,7 @@ const Checkout = () => {
 					user?.uid,
 					paymentIntent.id,
 					cartItems,
-					totalAmount
+					totalAmountOfProduct
 				);
 				dispatch(removeAllItems());
 				setSucceeded(true);
@@ -102,6 +100,7 @@ const Checkout = () => {
 	const handleRemove = (itemId) => {
 		dispatch(removeFromCart(itemId));
 	};
+	console.log("Total amount ", totalAmountOfProduct);
 
 	return (
 		<div className="min-h-screen pt-24 text-secondary bg-primary py-10">
@@ -173,7 +172,7 @@ const Checkout = () => {
 					</div>
 				</div>
 
-				{totalAmount > 0 ? (
+				{totalAmountOfProduct > 0 ? (
 					<div className="p-4 sm:p-6 flex flex-col items-center border-2 border-gray-400 shadow-md rounded-lg">
 						<p className="text-2xl font-bold mb-6">
 							Payment method
@@ -207,7 +206,7 @@ const Checkout = () => {
 									Total Amount
 								</h2>
 								<p className="text-xl sm:text-2xl font-semibold text-blue mt-2">
-									${Number(totalAmount).toFixed(2)}
+									${Number(totalAmountOfProduct).toFixed(2)}
 								</p>
 							</div>
 

@@ -18,7 +18,7 @@ const Cart = () => {
 		setCartItems(cartData);
 		setTotalAmount(calculateTotal(cartData));
 		setIsLoggedIn(authStatus);
-	}, [cartData]);
+	}, [cartData, authStatus]);
 
 	const handleRemove = (itemId) => {
 		dispatch(removeFromCart(itemId));

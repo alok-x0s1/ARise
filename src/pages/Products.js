@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import service from "../firebase/config";
-import ProductCard from "../components/ProductCard";
-import Loader from "../components/Loader";
+import { Loader, ProductCard } from "../components";
 
 const Products = () => {
 	const [products, setProducts] = useState([]);
@@ -37,7 +36,7 @@ const Products = () => {
 	}
 
 	return (
-		<div className="mt-12 min-h-screen bg-primary p-6">
+		<div className="min-h-screen bg-primary p-6">
 			<h1 className="text-3xl md:text-4xl font-bold text-secondary py-12 text-center">
 				Our Products
 			</h1>
