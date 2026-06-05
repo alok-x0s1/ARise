@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import service from "../firebase/config";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import service from "../firebase/config";
 
 const AddProduct = () => {
 	const [name, setName] = useState("");
 	const [price, setPrice] = useState("");
 	const [description, setDescription] = useState("");
 	const [image, setImage] = useState(null);
-	const [modelFile, setModelFile] = useState(null)
-	const [ratings, setRatings] = useState(0)
+	const [ratings, setRatings] = useState(0);
 	const [loading, setLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -18,14 +17,10 @@ const AddProduct = () => {
 		setImage(e.target.files[0]);
 	};
 
-	const handleModelChange = (e) => {
-		setModelFile(e.target.files[0]);
-	}
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		const data = await service.createProduct({
+		await service.createProduct({
 			id: uuidv4(),
 			name,
 			description,
@@ -45,10 +40,7 @@ const AddProduct = () => {
 				</h1>
 				<form onSubmit={handleSubmit} encType="multipart/form-data">
 					<div className="mb-4">
-						<label
-							htmlFor="name"
-							className="block mb-2"
-						>
+						<label htmlFor="name" className="block mb-2">
 							Name
 						</label>
 						<input
@@ -62,10 +54,7 @@ const AddProduct = () => {
 						/>
 					</div>
 					<div className="mb-4">
-						<label
-							htmlFor="price"
-							className="block mb-2"
-						>
+						<label htmlFor="price" className="block mb-2">
 							Price
 						</label>
 						<input
@@ -79,10 +68,7 @@ const AddProduct = () => {
 						/>
 					</div>
 					<div className="mb-4">
-						<label
-							htmlFor="ratings"
-							className="block mb-2"
-						>
+						<label htmlFor="ratings" className="block mb-2">
 							Ratings
 						</label>
 						<input
@@ -98,10 +84,7 @@ const AddProduct = () => {
 						/>
 					</div>
 					<div className="mb-4">
-						<label
-							htmlFor="description"
-							className="block mb-2"
-						>
+						<label htmlFor="description" className="block mb-2">
 							Description
 						</label>
 						<textarea
@@ -114,10 +97,7 @@ const AddProduct = () => {
 						/>
 					</div>
 					<div className="mb-4">
-						<label
-							htmlFor="image"
-							className="block mb-2"
-						>
+						<label htmlFor="image" className="block mb-2">
 							Image
 						</label>
 						<input

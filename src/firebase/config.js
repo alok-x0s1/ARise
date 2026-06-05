@@ -1,15 +1,14 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { db, storage } from "../conf/firebaseConf";
 import {
 	addDoc,
 	collection,
 	doc,
-	getDoc,
 	getDocs,
 	query,
 	setDoc,
-	where,
+	where
 } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { db, storage } from "../conf/firebaseConf";
 
 export class Service {
 	async createProduct({

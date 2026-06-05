@@ -1,4 +1,7 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import {
 	headContainerAnimation,
@@ -6,16 +9,13 @@ import {
 	headTextAnimation,
 	slideAnimation,
 } from "../../config/motion";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { toggleIntro } from "../../features/customizerSlice";
 import { addToCart } from "../../features/cartSlice";
+import { toggleIntro } from "../../features/customizerSlice";
 
 const Home = () => {
 	const navigate = useNavigate();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [product, setProduct] = useState({
+	const [product] = useState({
 		id: uuidv4(),
 		name: "T-Shirt",
 		image: "/t_shirt.png",

@@ -1,13 +1,11 @@
-import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import config from "../../config/config";
+import { useState } from "react";
 
-import { download } from "../../assets";
-import { reader, downloadCanvasToImage } from "../../config/helpers";
-import { EditorTabs, FilterTabs, DecalTypes } from "../../config/constants";
-import { fadeAnimation, slideAnimation } from "../../config/motion";
-import { FilePicker, AIPicker, Tab, ColorPicker } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
+import { AIPicker, ColorPicker, FilePicker, Tab } from "../../components";
+import { DecalTypes, EditorTabs, FilterTabs } from "../../config/constants";
+import { reader } from "../../config/helpers";
+import { fadeAnimation, slideAnimation } from "../../config/motion";
 import {
 	changeFullDecal,
 	changeLogoDecal,
