@@ -35,71 +35,79 @@ Make sure you have the following installed:
 ### Installation
 
 1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/alok-x0s1/ARise.git
-   cd ARise
-   ```
+
+    ```bash
+    git clone https://github.com/03aey/a-rise.git
+    cd a-rise
+    ```
 
 2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-   After this you should have enough knowledge about firebase, firebase CLI, storage, and database
+
+    ```bash
+    npm install
+    ```
+
+    After this you should have enough knowledge about firebase, firebase CLI, storage, and database
 
 3. **Create a `.env` file** in the root directory and add your environment variables:
-   ```plaintext
-   REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
-   REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-   REACT_APP_FIREBASE_PROJECT_ID=your_firebase_project_id
-   REACT_APP_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
-   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-   REACT_APP_FIREBASE_APP_ID=your_firebase_app_id
-   REACT_APP_STRIPE_SECRET_KEY=your_stripe_secret_key
-   REACT_APP_CLOUD_FUNCTION_URL=your_cloud_function_url
-   ```   
+
+    ```plaintext
+    REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+    REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+    REACT_APP_FIREBASE_PROJECT_ID=your_firebase_project_id
+    REACT_APP_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+    REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+    REACT_APP_FIREBASE_APP_ID=your_firebase_app_id
+    REACT_APP_STRIPE_SECRET_KEY=your_stripe_secret_key
+    REACT_APP_CLOUD_FUNCTION_URL=your_cloud_function_url
+    ```
 
 4. **Set up Firebase**:
-   - Create a Firebase project and configure Firebase services (Authentication, Firestore, and Storage).
-   - Set up Firebase Cloud Functions:
-     ```bash
-     cd functions
-     npm install
-     firebase deploy --only functions
-     cd ..
-     ```
+    - Create a Firebase project and configure Firebase services (Authentication, Firestore, and Storage).
+    - Set up Firebase Cloud Functions:
+        ```bash
+        cd functions
+        npm install
+        firebase deploy --only functions
+        cd ..
+        ```
     - Or you can also run firebase cloud function locally
-    ```bash
-     cd functions
-     npm install
-     firebase emulator:start
-     ```
-     By default port
-     ```URL
-     http://127.0.0.1:5001/[Something starts like this]
-     ```
+
+        ```bash
+        cd functions
+        npm install
+        firebase emulator:start
+        ```
+
+        By default port
+
+        ```URL
+        http://127.0.0.1:5001
+        ```
 
 5. **Set up Stripe**:
-   - Get your Stripe API keys from the [Stripe Dashboard](https://dashboard.stripe.com/apikeys).
-   - Add your Stripe keys to your Firebase Cloud Functions environment.
+    - Get your Stripe API keys from the [Stripe Dashboard](https://dashboard.stripe.com/apikeys).
+    - Add your Stripe keys to your Firebase Cloud Functions environment.
 
 6. **Start the development server**:
-   ```bash
-   npm start
-   ```
+    ```bash
+    npm start
+    ```
 
 ### Deployment
 
 To deploy the project, you can use Firebase Hosting:
 
 1. **Build the project**:
-   ```bash
-   npm run build
-   ```
+
+    ```bash
+    npm run build
+    ```
 
 2. **Deploy to Firebase**:
-   ```bash
-   firebase deploy --only hosting
-   ```
+    ```bash
+    firebase deploy --only hosting
+    ```
 
 ## Folder Structure
 
@@ -126,4 +134,9 @@ arise/
 ├── README.md               # Project documentation
 └── ...                     # Other project files and folders
 ```
-Something like this🔥⚠️
+
+### Connect with Me
+
+[![GitHub](https://img.shields.io/badge/GitHub-Alok%20Yadav-181717?logo=github)](https://github.com/03aey)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Alok%20Yadav-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/03aey)
+[![LinkedIn](https://img.shields.io/badge/Instagram-Alok%20Yadav-E4405F?logo=instagram&logoColor=white)](https://instagram.com/03aey)
